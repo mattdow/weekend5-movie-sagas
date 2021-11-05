@@ -15,8 +15,9 @@ import { action } from 'commander';
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
+    yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
 }
-
+// create a generator function to grab all movies
 function* fetchAllMovies() {
     // get all movies from the DB
     try {
@@ -26,10 +27,26 @@ function* fetchAllMovies() {
 
     } catch {
         console.log('get all error');
-    }
-        
+    }    
 }
+// create a generator function for the genres associated with the selected movie
+function* fetchSelectedGenres(action) {
+    // put the axios request for the movie in a try block
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/api/movie/${action.payload}`,
+        })
+        yield put({ type: 'SET_SELECTED_GENRES', payload: response.data });
+    } // end of try block
+    catch (err) {
+        console.log('Error on genres GET', err);
+        yield put({ type: 'GET_GENRE_ERROR'});
+    } // end of catch block
+} // end of fetchSelectedGenres
 
+
+    // get the genres 
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
@@ -67,6 +84,18 @@ const selectedMovie = (state = {}, action ) => {
             return state;
     } // end of switch statement
 } // end of selectedMovie reducer
+
+// Create reducer to store the selected movie genres. State should be an empty array prior to any dispatches.
+const selectedGenres = (state = [], action) => {
+    // use a switch statement to listen for multiple possible action types
+    switch (action.type) {
+        case 'SET_SELECTED_GENRES':
+            // return the list of genres 
+            return action.payload;
+        default:
+            return state;
+    }
+}
     
 
 // Create one store that all components can use
@@ -74,7 +103,8 @@ const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
-        selectedMovie
+        selectedMovie,
+        selectedGenres
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
