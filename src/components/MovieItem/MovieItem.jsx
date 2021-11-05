@@ -9,6 +9,7 @@ function MovieItem({ movie }) {
     const history = useHistory();
     // define a function to list actions that will run when a movie item is clicked
     const handleMovie = (movie) => {
+        console.log('In handleMovie for', movie);
         // store selected movie object in Redux via dispatch
         dispatch({ type: 'SET_SELECTED_MOVIE', payload: movie })
         // go to the details view
@@ -16,7 +17,7 @@ function MovieItem({ movie }) {
     } // end of handleMovie
 
     return (
-        <div  >
+        <div onClick={() => handleMovie(movie)}>
             <h3>{movie.title}</h3>
             <img src={movie.poster} alt={movie.title}/>
         </div>

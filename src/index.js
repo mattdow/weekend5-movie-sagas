@@ -10,6 +10,7 @@ import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
+import { action } from 'commander';
 
 // Create the rootSaga generator function
 function* rootSaga() {
@@ -52,11 +53,28 @@ const genres = (state = [], action) => {
     }
 }
 
+// Create reducer used to store the selected movie
+// We want the state to be an empty object upon initialization, 
+// and when a movie item is clicked, state changes to that movie object
+const selectedMovie = (state = {}, action ) => {
+    // use a switch statement to listen for multiple possible action types
+    switch (action.type) {
+        case 'SET_SELECTED_MOVIE':
+            // return the action payload alone, which is the selected movie object
+            return action.payload;
+        // if no anticipated action comes, return the previous state, which will likely be an empty object
+        default:
+            return state;
+    } // end of switch statement
+} // end of selectedMovie reducer
+    
+
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
         movies,
         genres,
+        selectedMovie
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),
