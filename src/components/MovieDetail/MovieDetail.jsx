@@ -12,7 +12,7 @@ function MovieDetail() {
     const selectedGenres = useSelector((store) => store.selectedGenres);
     useEffect(() => {
        dispatch({ type: 'FETCH_SELECTED_GENRES', payload: selectedMovie.id}) 
-    });
+    }, []);
 
     // grab the movie genres from Redux
  
