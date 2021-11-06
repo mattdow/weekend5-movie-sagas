@@ -26,6 +26,7 @@ router.get('/:id', (req, res) => {
                 `;
   pool.query(genreQuery, values)
     .then(response => {
+      // this will return an array of objects for the genres
       res.send(response.rows)
     }).catch(err => {
       console.log('Error on genre GET', err);
