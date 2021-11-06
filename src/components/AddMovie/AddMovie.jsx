@@ -39,7 +39,7 @@ function AddMovie() {
                     <br/>
             <select value={genre}
                     onChange={(e) => setGenre(e.target.value)}>
-                <option disabled value="0">
+                <option selected disabled value="">
                     Pick a Genre!
                 </option>
                 {genreList.map((genreChoice) => {
