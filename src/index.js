@@ -16,6 +16,7 @@ import { action } from 'commander';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
+    yield takeEvery('FETCH_GENRES', fetchGenres)
 }
 // create a generator function to grab all movies
 function* fetchAllMovies() {
@@ -28,7 +29,20 @@ function* fetchAllMovies() {
     } catch {
         console.log('get all error');
     }    
-}
+} // end of fetchAllMovies
+// create a generator function to grab the genres from DB
+function* fetchGenres() {
+    try {
+        // define a variable with the response from the DB.
+        let genreResponse = yield axios.get('api/genre');
+        // send the genre list to the reducer
+        yield put({type: 'SET_GENRES', payload: genreResponse.data})
+    }
+    catch(err) {
+        console.log('Error in fetchGenres', err);        
+    }
+} // end of fetchGenres
+
 // create a generator function for the genres associated with the selected movie
 function* fetchSelectedGenres(action) {
     // put the axios request for the movie in a try block
@@ -97,7 +111,6 @@ const selectedGenres = (state = [], action) => {
     }
 }
     
-
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
