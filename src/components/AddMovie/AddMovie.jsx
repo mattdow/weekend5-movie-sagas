@@ -17,6 +17,23 @@ function AddMovie() {
     let [description, setDescription] = useState('');
     let [genre, setGenre] = useState('');
 
+    // define a handleSubmit function to submit a new movie to the list
+    function handleSubmit(event) {
+        event.preventDefault();
+        let newMovie = {
+            title: title,
+            poster: posterUrl,
+            description: description,
+            genre_id: genre
+        }
+
+        console.log('CLICKED on submit', newMovie);
+        dispatch({
+            type: 'ADD_MOVIE',
+            payload: newMovie
+        })
+    }
+
     // Employ useEffect hook to populate the genre list on load
     useEffect(() => {
         dispatch({ type: 'FETCH_GENRES' });
@@ -26,36 +43,34 @@ function AddMovie() {
     return (
         <div>
             <h2>Add Movie</h2>
-            <input type="text" value={title}
-                   placeholder="Movie Title"
-                   onChange={(e) => setTitle(e.target.value)} />
-            <input type="text" value={posterUrl}
-                   placeholder="Movie Poster URL"
-                   onChange={(e) => setPosterUrl(e.target.value)} />
-                   <br/>
-            <textarea value={description}
-                      placeholder="Movie Description"
-                      onChange={(e) => setDescription(e.target.value)} />
+            <form onSubmit={handleSubmit}>
+                <input type="text" value={title}
+                    placeholder="Movie Title"
+                    onChange={(e) => setTitle(e.target.value)} />
+                <input type="text" value={posterUrl}
+                    placeholder="Movie Poster URL"
+                    onChange={(e) => setPosterUrl(e.target.value)} />
                     <br/>
-            <select value={genre}
-                    onChange={(e) => setGenre(e.target.value)}>
-                <option selected disabled value="">
-                    Pick a Genre!
-                </option>
-                {genreList.map((genreChoice) => {
-                    return (
-                        <option key={genreChoice.id} value={genreChoice.id}>
-                            {genreChoice.name}
-                        </option>
-                    );
-                })};
-            </select>
-
-
-
-
-
+                <textarea value={description}
+                        placeholder="Movie Description"
+                        onChange={(e) => setDescription(e.target.value)} />
+                        <br/>
+                <select value={genre}
+                        onChange={(e) => setGenre(e.target.value)}>
+                    <option disabled selected value="">
+                        Pick a Genre!
+                    </option>
+                    {genreList.map((genreChoice) => {
+                        return (
+                            <option key={genreChoice.id} value={genreChoice.id}>
+                                {genreChoice.name}
+                            </option>
+                        );
+                    })};
+                </select>
+                <input type="submit" />
+            </form>     
         </div>
-    )
+    ) // end of render code
 } // end of AddMovie
 export default AddMovie;

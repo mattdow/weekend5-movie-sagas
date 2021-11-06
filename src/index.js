@@ -16,7 +16,8 @@ import { action } from 'commander';
 function* rootSaga() {
     yield takeEvery('FETCH_MOVIES', fetchAllMovies);
     yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
-    yield takeEvery('FETCH_GENRES', fetchGenres)
+    yield takeEvery('FETCH_GENRES', fetchGenres);
+    yield takeEvery('ADD_MOVIE', addMovie);
 }
 // create a generator function to grab all movies
 function* fetchAllMovies() {
@@ -59,8 +60,16 @@ function* fetchSelectedGenres(action) {
     } // end of catch block
 } // end of fetchSelectedGenres
 
-
-    // get the genres 
+// create a generator function to post a movie
+function* addMovie(action) {
+    try {
+        yield axios.post('/api/movie', action.payload);
+        // if the add is completed successfully, we need to fetch the new movie list
+        yield put ({type: 'FETCH_MOVIES'});
+    } catch(err) {
+        console.log('Error in addMovie', err);        
+    }
+} // end of addMovie
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
