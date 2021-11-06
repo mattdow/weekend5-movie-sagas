@@ -20,18 +20,20 @@ function AddMovie() {
     // define a handleSubmit function to submit a new movie to the list
     function handleSubmit(event) {
         event.preventDefault();
+        // define my new movie object using the state variables
         let newMovie = {
             title: title,
             poster: posterUrl,
             description: description,
             genre_id: genre
         }
-
         console.log('CLICKED on submit', newMovie);
+        // dispatch the new movie to the appropriate Saga
         dispatch({
             type: 'ADD_MOVIE',
             payload: newMovie
         })
+        history.push('/');
     }
 
     // Employ useEffect hook to populate the genre list on load
@@ -43,7 +45,7 @@ function AddMovie() {
     return (
         <div>
             <h2>Add Movie</h2>
-            <form onSubmit={handleSubmit}>
+            
                 <input type="text" value={title}
                     placeholder="Movie Title"
                     onChange={(e) => setTitle(e.target.value)} />
@@ -68,8 +70,10 @@ function AddMovie() {
                         );
                     })};
                 </select>
-                <input type="submit" />
-            </form>     
+                <button onClick={handleSubmit}>SAVE MOVIE</button>
+                <br />
+                <button onClick={() => history.push('/')}>CANCEL</button>
+               
         </div>
     ) // end of render code
 } // end of AddMovie

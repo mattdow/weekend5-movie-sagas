@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import './MovieItem.css';
 
 // creating a component for each individual movie item for ease of selecting and styling
 function MovieItem({ movie }) {
@@ -17,9 +18,9 @@ function MovieItem({ movie }) {
     } // end of handleMovie
 
     return (
-        <div onClick={() => handleMovie(movie)}>
+        <div className="movie-card" onClick={() => handleMovie(movie)}>
             <h3>{movie.title}</h3>
-            <img src={movie.poster} alt={movie.title}/>
+            <img className="poster" src={movie.poster} alt={movie.title}/>
         </div>
     )
 } // end of MovieItem
