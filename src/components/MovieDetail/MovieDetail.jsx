@@ -58,6 +58,9 @@ function MovieDetail() {
                             component="img"
                             src={selection.poster} 
                             alt={selection.title}/>
+                        <Typography variant="body2" sx={{m:2, color:"slategray"}}>
+                            {selection.description}
+                        </Typography>
                         {selectedGenres.map((genre) => (
                             <Typography sx={{m:2}} variant="body" fontStyle="italic">{genre.name}</Typography>
                         ))}
