@@ -73,7 +73,6 @@ function AddMovie() {
                 <button onClick={handleSubmit}>SAVE MOVIE</button>
                 <br />
                 <button onClick={() => history.push('/')}>CANCEL</button>
-               
         </div>
     ) // end of render code
 } // end of AddMovie
