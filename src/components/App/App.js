@@ -3,6 +3,7 @@ import './App.css';
 import MovieList from '../MovieList/MovieList';
 import MovieDetail from '../MovieDetail/MovieDetail';
 import AddMovie from '../AddMovie/AddMovie';
+import MovieEdit from '../MovieEdit/MovieEdit';
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
           <AddMovie />
         </Route>
         <Switch>
-          <Route path="/:id" children={<MovieDetail />} />
+          <Route exact path="/:id" children={<MovieDetail />} />
+        </Switch>
+        <Switch>
+          <Route exact path="/edit/:id" children={<MovieEdit />} /> 
         </Switch>
       </Router>
     </div>

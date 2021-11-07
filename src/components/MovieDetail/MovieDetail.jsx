@@ -60,6 +60,8 @@ function MovieDetail() {
                 )
             }
             <button onClick={() => history.push('/')}>Back To Movie List</button>
+            <br />
+            <button onClick={() => history.push(`/edit/${id}`)}>Edit Movie</button>
         </section>
     );
 } // end of MovieDetail
