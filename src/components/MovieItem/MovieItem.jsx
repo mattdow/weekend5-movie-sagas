@@ -12,7 +12,7 @@ function MovieItem({ movie }) {
     const handleMovie = (movie) => {
         console.log('In handleMovie for', movie);
         // store selected movie object in Redux via dispatch
-        dispatch({ type: 'SET_SELECTED_MOVIE', payload: movie })
+        dispatch({ type: 'SET_SELECTED_MOVIE', payload: movie.id })
         // go to the details view, with the ID reference
         history.push(`/${movie.id}`);
     } // end of handleMovie
