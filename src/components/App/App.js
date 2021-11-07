@@ -4,8 +4,14 @@ import MovieList from '../MovieList/MovieList';
 import MovieDetail from '../MovieDetail/MovieDetail';
 import AddMovie from '../AddMovie/AddMovie';
 import MovieEdit from '../MovieEdit/MovieEdit';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({ type: 'FETCH_MOVIES'}); 
+ }, []);
   return (
     <div className="App">
       <h1>The Movies Saga!</h1>
