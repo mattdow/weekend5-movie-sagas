@@ -15,14 +15,12 @@ function MovieDetail() {
     console.log(id);
     // grab the movie array from Redux 
     const movies = useSelector((store) => store.movies);
-    console.log(movies[id]);
 
     // Using the ID from params, I'll search through the movie array to pick out the correct selection for display
     let selection = {};
     function selectedMovie()  {
         // console.log('ID is ', id);
         for (let movie of movies) {
-            console.log('Movie  ID is ',movie.id);
             if (movie.id === Number(id)) {
                 selection = movie;
             } 

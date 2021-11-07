@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
     yield takeEvery('FETCH_GENRES', fetchGenres);
     yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('EDIT_MOVIE', editMovie)
 }
 // create a generator function to grab all movies
 function* fetchAllMovies() {
@@ -70,6 +71,13 @@ function* addMovie(action) {
         console.log('Error in addMovie', err);        
     }
 } // end of addMovie
+
+// create a generator function to edit a movie
+// function* editMovie(action) {
+//     try {
+//         yield axios.put('/api')
+//     }
+// }
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 

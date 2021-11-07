@@ -35,23 +35,21 @@ function MovieEdit () {
     // define a handleSubmit function to submit a new movie to the list
     function handleSubmit(event) {
         event.preventDefault();
-        // define my new movie object using the state variables
+        // define the new movie data object using the state variables
         let newMovieData = {
+            id: id,
             title: newTitle,
             description: newDescription,
         }
         console.log('CLICKED on submit', newMovieData);
-        // dispatch the new movie to the appropriate Saga
-        // dispatch({
-        //     type: 'ADD_MOVIE',
-        //     payload: newMovie
-        // })
+        // dispatch to the edit movie Saga
+        dispatch({
+            type: 'EDIT_MOVIE',
+            payload: newMovieData
+        })
+        // re-route to the details page
         history.push(`/${id}`);
     }
-
-
-
-
 
     useEffect(() => {
         dispatch({ type: 'FETCH_MOVIES'}); 
