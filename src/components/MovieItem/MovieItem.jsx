@@ -14,7 +14,7 @@ function MovieItem({ movie }) {
         // store selected movie object in Redux via dispatch. In base, I dispatched the entire movie object. For stretch goal, I'm only dispatching the ID.
         dispatch({ type: 'SET_SELECTED_MOVIE', payload: movie.id })
         // go to the details view, with the ID reference
-        history.push(`/${movie.id}`);
+        history.push(`details/${movie.id}`);
     } // end of handleMovie
 
     return (

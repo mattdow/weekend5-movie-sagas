@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+// GET router for the full list of movie objects
 router.get('/', (req, res) => {
     const query = `SELECT * FROM movies ORDER BY "title" ASC`;
   pool.query(query)
@@ -33,6 +34,33 @@ router.get('/:id', (req, res) => {
       res.sendStatus(500);
     })
 })
+
+// create a PUT router to edit the title and description of an existing movie object
+router.put('/:id', (req, res) => {
+  console.log('In movie PUT router w/ movie ID', req.params.id);
+  // define the parameters for the query
+  const editID = req.params.id;
+  const newTitle = req.body.title;
+  const newDescription = req.body.description;
+  const values = [editID, newTitle, newDescription];
+  // define the SQL query that will alter the selected fields
+  const editQuery = `UPDATE movies
+                    SET title = $2,
+                    description = $3
+                    WHERE movies.id = $1;
+                    `;
+  // make a query to the DB pool with the defined query and params above
+  pool.query(editQuery, values)
+    .then((response) => {
+      console.log('PUT server response is', response);
+      res.sendStatus(201);      
+    })
+    // catch for the edit query
+    .catch((err) => {
+      console.log('Error making PUT request to DB', err);
+      res.sendStatus(500);
+    });
+}); // end of movies put route
 
 router.post('/', (req, res) => {
   console.log(req.body);

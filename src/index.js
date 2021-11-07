@@ -18,6 +18,7 @@ function* rootSaga() {
     yield takeEvery('FETCH_SELECTED_GENRES', fetchSelectedGenres);
     yield takeEvery('FETCH_GENRES', fetchGenres);
     yield takeEvery('ADD_MOVIE', addMovie);
+    yield takeEvery('EDIT_MOVIE', editMovie)
 }
 // create a generator function to grab all movies
 function* fetchAllMovies() {
@@ -70,6 +71,21 @@ function* addMovie(action) {
         console.log('Error in addMovie', err);        
     }
 } // end of addMovie
+
+// create a generator function to edit a movie
+function* editMovie(action) {
+    // set a variable equal to the id field of the payload from MovieEdit
+    let editID = action.payload.id;
+    try {
+        // use the ID in params and full payload as body of the put call to the server/DB
+        yield axios.put(`/api/movie/${editID}`, action.payload);
+        // if the put is successful, fetch the updated movie list
+        yield put ({type: 'FETCH_MOVIES'});
+    } catch(err) {
+        console.log('Error in editMovie', err);        
+    }
+} // end of editMovie
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
