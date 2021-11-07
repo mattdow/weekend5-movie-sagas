@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import './MovieItem.css';
+import { Card, CardHeader, CardMedia } from '@mui/material';
 
 // creating a component for each individual movie item for ease of selecting and styling
 function MovieItem({ movie }) {
@@ -18,10 +19,20 @@ function MovieItem({ movie }) {
     } // end of handleMovie
 
     return (
-        <div className="movie-card" onClick={() => handleMovie(movie)}>
-            <h3>{movie.title}</h3>
-            <img className="poster" src={movie.poster} alt={movie.title}/>
-        </div>
+        // <div className="movie-card" onClick={() => handleMovie(movie)}>
+        //     <h3>{movie.title}</h3>
+        //     <img className="poster" src={movie.poster} alt={movie.title}/>
+        // </div>
+        <Card variant="outlined"
+              onClick={() => handleMovie(movie)}>
+            <CardHeader title={movie.title}/>
+                <CardMedia
+                  component="img"
+                //   height="150"
+                //   width="150"
+                  image={movie.poster}>
+                </CardMedia>
+        </Card>
     )
 } // end of MovieItem
 

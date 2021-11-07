@@ -18,8 +18,6 @@ function MovieList() {
     }, []);
     // render the movie list 
     return (
-        <main>
-            {/* <button onClick={()=>history.push('/add')}>Add Movie</button> */}
             <Grid container spacing={2} className="movies">
                 {movies.map(movie => {
                     return (
@@ -29,8 +27,6 @@ function MovieList() {
                     );
                 })}
             </Grid>
-        </main>
-
     );
 }
 
