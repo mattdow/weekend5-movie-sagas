@@ -49,11 +49,13 @@ router.put('/:id', (req, res) => {
                     description = $3
                     WHERE movies.id = $1;
                     `;
+  // make a query to the DB pool with the defined query and params above
   pool.query(editQuery, values)
     .then((response) => {
       console.log('PUT server response is', response);
       res.sendStatus(201);      
     })
+    // catch for the edit query
     .catch((err) => {
       console.log('Error making PUT request to DB', err);
       res.sendStatus(500);

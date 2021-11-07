@@ -15,10 +15,8 @@ function MovieEdit () {
     let [newDescription, setNewDescription] = useState('');
     // grab the movie ID number from the react router params
     let { id } = useParams();
-    console.log(id);
     // grab the movie array from Redux 
     const movies = useSelector((store) => store.movies);
-    console.log(movies);
     // Using the ID from params, I'll search through the movie array to pick out the correct selection for display
     let selection = {};
     function selectedMovie()  {
@@ -48,12 +46,12 @@ function MovieEdit () {
             payload: newMovieData
         })
         // re-route to the details page
-        history.push(`/${id}`);
+        history.push(`/details/${id}`);
     }
 
-    useEffect(() => {
-        dispatch({ type: 'FETCH_MOVIES'}); 
-     }, []);
+    // useEffect(() => {
+    //     dispatch({ type: 'FETCH_MOVIES'}); 
+    //  }, []);
 
     return (
         <>
@@ -68,7 +66,7 @@ function MovieEdit () {
         <br/>
         <button onClick={handleSubmit}>SAVE EDITS</button>
         <br />
-        <button onClick={() => history.push(`/${id}`)}>CANCEL</button>
+        <button onClick={() => history.push(`/details/${id}`)}>CANCEL</button>
         </>
     )
 }

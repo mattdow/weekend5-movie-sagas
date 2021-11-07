@@ -19,11 +19,11 @@ function App() {
         <Route path="/" exact>
           <MovieList />
         </Route>
-        <Route path="/add">
+        <Route exact path="/add">
           <AddMovie />
         </Route>
         <Switch>
-          <Route exact path="/:id" children={<MovieDetail />} />
+          <Route exact path="/details/:id" children={<MovieDetail />} />
         </Switch>
         <Switch>
           <Route exact path="/edit/:id" children={<MovieEdit />} /> 
