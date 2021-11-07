@@ -18,7 +18,7 @@ function MovieList() {
     }, []);
     // render the movie list 
     return (
-            <Grid container spacing={2} className="movies">
+            <Grid container  className="movies">
                 {movies.map(movie => {
                     return (
                         <Grid item xs={3}>
