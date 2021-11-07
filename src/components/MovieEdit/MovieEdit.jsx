@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-
+import { Typography, TextField, Button, Card, Grid, Paper, MenuItem} from '@mui/material';
 
 
 function MovieEdit () {
@@ -54,20 +54,35 @@ function MovieEdit () {
     //  }, []);
 
     return (
-        <>
-        <h1>Edit Page</h1>
-        <h2>Movie to Edit: {selection.title}</h2>
-        <input type="text" value={newTitle}
-               placeholder="New Title"
-               onChange={(e) => setNewTitle(e.target.value)} />
-        <textarea value={newDescription}
-                  placeholder="New Description"
-                  onChange={(e) => setNewDescription(e.target.value)} />
-        <br/>
-        <button onClick={handleSubmit}>SAVE EDITS</button>
-        <br />
-        <button onClick={() => history.push(`/details/${id}`)}>CANCEL</button>
-        </>
+        <section className="add-page">
+            <Paper sx={{ m:2, justifyContent: "center"}}>
+            <Typography sx={{ mt:2}} variant="h4">Editing: {selection.title}</Typography>
+                <TextField
+                    sx={{ m:2, maxWidth:"90%"}}
+                    id="standard-required"
+                    required
+                    fullWidth
+                    label="New Movie Title"
+                    value={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                />
+                <TextField 
+                    sx={{ m:2, maxWidth:"90%"}}
+                    fullWidth
+                    required
+                    multiline
+                    id="outlined-multiline-static"
+                    rows={4}
+                    value={newDescription}
+                    label="New Movie Description"
+                    onChange={(e) => setNewDescription(e.target.value)} />
+                        
+                <br />
+                <Button variant="contained" color="success" sx={{m:2}} onClick={handleSubmit}>SAVE CHANGES</Button>
+                
+                <Button variant="contained" color="error" sx={{m:2}}onClick={() => history.push(`/details/${id}`)}>CANCEL</Button>
+        </Paper>
+        </section>
     )
 }
 export default MovieEdit;

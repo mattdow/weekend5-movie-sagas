@@ -47,7 +47,7 @@ function MovieDetail() {
             
             {
                 selection.title ? (
-                    <Card  sx={{m:4, maxWidth: '50%'}}>
+                    <Card  sx={{m:4, maxWidth: '45%'}}>
                         
                             <Typography variant="h5"
                                         fontWeight="bold"
@@ -59,13 +59,13 @@ function MovieDetail() {
                             src={selection.poster} 
                             alt={selection.title}/>
                         {selectedGenres.map((genre) => (
-                            <Typography sx={{m:2}} variant="body">{genre.name}</Typography>
+                            <Typography sx={{m:2}} variant="body" fontStyle="italic">{genre.name}</Typography>
                         ))}
                         <CardActionArea>
-                            <Button size='large' variant="outlined" sx={{m:2}}
+                            <Button size='medium' variant="outlined" sx={{m:2}}
                             color="secondary" onClick={() => history.push('/')}>Back To Movie List</Button>
-                            <Button size='large' variant="outlined" sx={{m:2}}
-                            color="success"onClick={() => history.push(`/edit/${id}`)}>Edit Movie</Button>
+                            <Button size='medium' variant="outlined" sx={{m:2}}
+                            color="warning"onClick={() => history.push(`/edit/${id}`)}>Edit Movie</Button>
                         </CardActionArea>
                     </Card>
                 ) : (
