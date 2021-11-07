@@ -2,6 +2,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { Card, CardHeader, CardMedia, Typography, Button, CardActionArea } from '@mui/material';
+import './MovieDetail.css';
 
 
 // show the selected movie data from Redux
@@ -41,25 +43,36 @@ function MovieDetail() {
  
     console.log('In Movie Detail', selectedGenres);
     return (
-        <section>
-            <h1>Selected Movie</h1>
+        <section className="detail-page">
+            
             {
                 selection.title ? (
-                    <div  >
-                        <h3>{selection.title}</h3>
-                        <img src={selection.poster} alt={selection.title}/>
-                        <br />
+                    <Card  sx={{m:4, maxWidth: '45%'}}>
+                        
+                            <Typography variant="h5"
+                                        fontWeight="bold"
+                                        sx={{m:2}}>{selection.title}</Typography>
+                       
+                        <CardMedia 
+                            sx={{mb:2}}
+                            component="img"
+                            src={selection.poster} 
+                            alt={selection.title}/>
                         {selectedGenres.map((genre) => (
-                            <h4>{genre.name}</h4>
+                            <Typography sx={{m:2}} variant="body" fontStyle="italic">{genre.name}</Typography>
                         ))}
-                    </div>
+                        <CardActionArea>
+                            <Button size='medium' variant="outlined" sx={{m:2}}
+                            color="secondary" onClick={() => history.push('/')}>Back To Movie List</Button>
+                            <Button size='medium' variant="outlined" sx={{m:2}}
+                            color="warning"onClick={() => history.push(`/edit/${id}`)}>Edit Movie</Button>
+                        </CardActionArea>
+                    </Card>
                 ) : (
-                    <h3>No movie selected.</h3>
+                    <Typography gutterBottom variant="h4">No movie selected.</Typography>
                 )
             }
-            <button onClick={() => history.push('/')}>Back To Movie List</button>
-            <br />
-            <button onClick={() => history.push(`/edit/${id}`)}>Edit Movie</button>
+            
         </section>
     );
 } // end of MovieDetail

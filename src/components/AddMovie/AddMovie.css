@@ -1,0 +1,9 @@
+.add-page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.text-input {
+    margin: 2em 2em;
+}

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './MovieList.css';
 import MovieItem from '../MovieItem/MovieItem.jsx';
 import { useHistory } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 function MovieList() {
     // set dispatch hook as a variable for use
@@ -17,17 +18,15 @@ function MovieList() {
     }, []);
     // render the movie list 
     return (
-        <main>
-            <button onClick={()=>history.push('/add')}>Add Movie</button>
-            <section className="movies">
+            <Grid container  className="movies">
                 {movies.map(movie => {
                     return (
-                        <MovieItem key={movie.id} movie={movie} />
+                        <Grid item xs={3}>
+                            <MovieItem key={movie.id} movie={movie} />
+                        </Grid>
                     );
                 })}
-            </section>
-        </main>
-
+            </Grid>
     );
 }
 
