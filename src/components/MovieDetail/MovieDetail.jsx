@@ -17,8 +17,8 @@ function MovieDetail() {
     const movies = useSelector((store) => store.movies);
     console.log(movies[id]);
 
+    // Using the ID from params, I'll search through the movie array to pick out the correct selection for display
     let selection = {};
-
     function selectedMovie()  {
         console.log('ID is ', id);
         for (let movie of movies) {
@@ -28,18 +28,9 @@ function MovieDetail() {
             } 
         } // end of for loop
     }
-    
     selectedMovie();
-
-    
-
     console.log('In movie details for', selection);
 
-
-
-
-    // grab the movie object from Redux
-    // const selectedMovie = useSelector((store) => store.selectedMovie);
     // grab the genres for the selected movie from Redux
     const selectedGenres = useSelector((store) => store.selectedGenres);
     
