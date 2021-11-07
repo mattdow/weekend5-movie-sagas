@@ -18,7 +18,7 @@ function MovieList() {
     // render the movie list 
     return (
         <main>
-            <button onClick={()=>history.push('/add')}>Add Movie</button>
+            {/* <button onClick={()=>history.push('/add')}>Add Movie</button> */}
             <section className="movies">
                 {movies.map(movie => {
                     return (

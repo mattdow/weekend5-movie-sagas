@@ -6,6 +6,7 @@ import AddMovie from '../AddMovie/AddMovie';
 import MovieEdit from '../MovieEdit/MovieEdit';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import Navbar from '../Navbar/Navbar.jsx'
 
 function App() {
   const dispatch = useDispatch();
@@ -14,8 +15,8 @@ function App() {
  }, []);
   return (
     <div className="App">
-      <h1>The Movies Saga!</h1>
-      <Router>        
+      <Router> 
+        <Navbar />       
         <Route path="/" exact>
           <MovieList />
         </Route>
