@@ -30,14 +30,14 @@ function MovieEdit () {
         } // end of for loop
     }
     selectedMovie();
-    console.log('In movie edit for', selection);
+    // console.log('In movie edit for', selection);
 
     // define a handleSubmit function to submit a new movie to the list
     function handleSubmit(event) {
         event.preventDefault();
         // define the new movie data object using the state variables
         let newMovieData = {
-            id: id,
+            id: Number(id),
             title: newTitle,
             description: newDescription,
         }

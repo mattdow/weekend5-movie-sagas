@@ -73,11 +73,19 @@ function* addMovie(action) {
 } // end of addMovie
 
 // create a generator function to edit a movie
-// function* editMovie(action) {
-//     try {
-//         yield axios.put('/api')
-//     }
-// }
+function* editMovie(action) {
+    // set a variable equal to the id field of the payload from MovieEdit
+    let editID = action.payload.id;
+    try {
+        // use the ID in params and full payload as body of the put call to the server/DB
+        yield axios.put(`/api/movie/${editID}`, action.payload);
+        // if the put is successful, fetch the updated movie list
+        yield put ({type: 'FETCH_MOVIES'});
+    } catch(err) {
+        console.log('Error in editMovie', err);        
+    }
+} // end of editMovie
+
 // Create sagaMiddleware
 const sagaMiddleware = createSagaMiddleware();
 
