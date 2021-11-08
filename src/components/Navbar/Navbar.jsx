@@ -9,8 +9,8 @@ function Navbar() {
     return (
         <Grid className="nav-bar" container justifyContent="space-evenly" alignItems="center">
             <Typography 
-                sx = {{m:2, display: 'inline-block', fontStyle: 'oblique', fontWeight: 'bold',}}
-                variant='h4'>THE MOVIES SAGA</Typography>
+                sx = {{m:2, display: 'inline-block', }}
+                variant='h3'>My Movie Gallery</Typography>
             <Button
                 sx = { {m:2, display:'inline-block'} }
                 size = "large"
