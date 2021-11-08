@@ -110,13 +110,13 @@ const genres = (state = [], action) => {
 }
 
 // Create reducer used to store the selected movie
-// We want the state to be an empty object upon initialization, 
-// and when a movie item is clicked, state changes to that movie object
+// We want the state to be a number upon initialization, 
+// and when a movie item is clicked, state changes to that movie's ID number
 const selectedMovie = (state = 0, action ) => {
     // use a switch statement to listen for multiple possible action types
     switch (action.type) {
         case 'SET_SELECTED_MOVIE':
-            // return the action payload alone, which is the selected movie object
+            // return the action payload alone, which is the selected movie ID number
             return action.payload;
         // if no anticipated action comes, return the previous state, which will likely be an empty object
         default:

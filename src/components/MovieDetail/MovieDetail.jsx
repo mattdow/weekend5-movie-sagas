@@ -35,6 +35,7 @@ function MovieDetail() {
     const selectedGenres = useSelector((store) => store.selectedGenres);
     
     useEffect(() => {
+        // this dispatch might not be necessary since I included it in App
        dispatch({ type: 'FETCH_MOVIES'});
        dispatch({ type: 'FETCH_SELECTED_GENRES', payload: id}); 
     }, []);
